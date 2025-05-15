@@ -1,6 +1,6 @@
 {
   "name": "react-native-strongly-log",
-  "version": "0.1.7",
+  "version": "1.0.0",
   "description": "React Native Log for Android and iOS",
   "source": "./src/index.tsx",
   "main": "./lib/module/index.js",
