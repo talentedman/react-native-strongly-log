@@ -87,4 +87,11 @@ export default class StronglyLog {
   static zipLogFiles(): Promise<string> {
     return SLog.zipLogFiles();
   }
+  /**
+   * 强制刷新日志缓冲区
+   * @returns 返回一个 Promise
+   */
+  static flush(): Promise<number> {
+    return SLog.flush();
+  }
 }

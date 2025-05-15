@@ -95,4 +95,14 @@ RCT_REMAP_METHOD(clearAllLogs, resolve2:(RCTPromiseResolveBlock)resolve reject:(
   });
 }
 
+#pragma mark - flush
+
+RCT_REMAP_METHOD(flush, resolve2:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [SLog flushLogFile];
+    
+    resolve(@(1));
+  });
+}
+
 @end

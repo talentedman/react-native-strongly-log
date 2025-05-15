@@ -129,4 +129,9 @@ public class StronglyLogModule  extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void flush(final Promise promise) {
+        // android 这边写日志内部会flush, 所有这里不需要做任何事情, 只是为了同步ios方法
+        promise.resolve(1);
+    }
 }

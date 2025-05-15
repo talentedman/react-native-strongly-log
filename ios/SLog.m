@@ -47,6 +47,12 @@ static FILE* file = NULL;
     sm_logFile = nil;
 }
 
++(void)flushLogFile {
+    if (!file) return;
+    // 把缓存中的数据写入文件
+    fflush(file);
+}
+
 +(void)initLogFile:(NSString*)logFileFolder {
     [SLog closeLogFile];
     if (!logFileFolder || logFileFolder.length == 0) {
@@ -155,7 +161,7 @@ static FILE* file = NULL;
 }
 +(void)v:(NSString*)tag msg:(NSString*)msg {
     if (!IS_LOG) return;
-    
+
     if (IS_CONSOLE) {
         NSLog(@"V/%@: %@", tag, msg);
     }
