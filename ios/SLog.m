@@ -83,13 +83,9 @@ static FILE* file = NULL;
 #pragma mark - setup
 
 + (void)setup {
-    NSString* logFileFolder = nil;
+    NSString* logFileFolder = [SLog getLogFileFolder];
     BOOL bLog = YES;
     BOOL bConsole = YES;
-    
-#if !defined(DEBUG)
-    logFileFolder = [SLog getLogFileFolder];
-#endif
     
     IS_LOG = bLog;
     IS_CONSOLE = bConsole;
