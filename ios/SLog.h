@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString*)getLogFile;
 
 +(void)clearOldLogs;
-
++(void)flushLogFile;
 
 +(void)v:(NSString*)msg;
 +(void)v:(NSString*)tag msg:(NSString*)msg;
