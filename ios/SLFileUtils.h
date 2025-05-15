@@ -1,9 +1,9 @@
 
 
-#ifndef FileUtils_h
-#define FileUtils_h
+#ifndef SLFileUtils_h
+#define SLFileUtils_h
 
-@interface FileUtils : NSObject
+@interface SLFileUtils : NSObject
 {
   
 }
@@ -54,4 +54,4 @@
 
 
 
-#endif /* FileUtils_h */
+#endif /* SLFileUtils_h */

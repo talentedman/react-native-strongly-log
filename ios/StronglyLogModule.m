@@ -2,7 +2,7 @@
 
 #import "StronglyLogModule.h"
 #import <SLog.h>
-#import <FileUtils.h>
+#import <SLFileUtils.h>
 #import <SSZipArchive.h>
 
 @implementation StronglyLogModule
@@ -58,7 +58,7 @@ RCT_REMAP_METHOD(zipLogFiles, resolve1:(RCTPromiseResolveBlock)resolve reject:(R
     
     NSString* ret = nil;
     
-    [FileUtils mkdirs:logZipFolder];
+    [SLFileUtils mkdirs:logZipFolder];
     
     if ([SSZipArchive createZipFileAtPath:zipFile withContentsOfDirectory:logFileFolder]) {
       ret = zipFile;
@@ -77,7 +77,7 @@ RCT_REMAP_METHOD(clearAllLogs, resolve2:(RCTPromiseResolveBlock)resolve reject:(
     
     NSFileManager* fm = [NSFileManager defaultManager];
     
-    NSArray<NSString*>* files = [FileUtils listFiles:fm folderPath:logFileFolder];
+    NSArray<NSString*>* files = [SLFileUtils listFiles:fm folderPath:logFileFolder];
     for (NSString* file in files) {
       BOOL isDirectory;
       [fm fileExistsAtPath:file isDirectory:&isDirectory];
@@ -88,7 +88,7 @@ RCT_REMAP_METHOD(clearAllLogs, resolve2:(RCTPromiseResolveBlock)resolve reject:(
         continue;
       }
       
-      [FileUtils deleteFile:fm path:file];
+      [SLFileUtils deleteFile:fm path:file];
     }
     
     resolve(@(1));

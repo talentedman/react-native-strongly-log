@@ -1,6 +1,6 @@
 
 #import "SLog.h"
-#import "FileUtils.h"
+#import "SLFileUtils.h"
 
 
 @implementation SLog
@@ -24,7 +24,7 @@ static FILE* file = NULL;
 +(BOOL)doCreateLogFile {
     if (!sm_logFolderPath) return NO;
     
-    [FileUtils mkdirs:sm_logFolderPath];
+    [SLFileUtils mkdirs:sm_logFolderPath];
     
     
     NSString* timeStr = [SLog getNowTime];
@@ -123,7 +123,7 @@ static FILE* file = NULL;
     
     NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
     
-    NSArray<NSString*>* files = [FileUtils listFiles:fm folderPath:logFileFolder];
+    NSArray<NSString*>* files = [SLFileUtils listFiles:fm folderPath:logFileFolder];
     for (NSString* file in files) {
       BOOL isDirectory;
       [fm fileExistsAtPath:file isDirectory:&isDirectory];
@@ -140,7 +140,7 @@ static FILE* file = NULL;
       int days = ((now - [modifiedDate timeIntervalSince1970]) / (3600 * 24));
       if (days < 4) continue;
       
-      [FileUtils deleteFile:fm path:file];
+      [SLFileUtils deleteFile:fm path:file];
     }
 }
 

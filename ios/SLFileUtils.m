@@ -1,9 +1,9 @@
 
 
 #import <Foundation/Foundation.h>
-#import "FileUtils.h"
+#import "SLFileUtils.h"
 
-@implementation FileUtils
+@implementation SLFileUtils
 
 
 + (NSFileManager*)getFileManager
@@ -32,7 +32,7 @@
   }
   
   NSString *srcData = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-  return [FileUtils readJsonDataString:srcData key:key];
+  return [SLFileUtils readJsonDataString:srcData key:key];
 }
 
 + (NSDictionary*)readJsonToDictionary:(NSString*)path
@@ -79,12 +79,12 @@
     
     NSURL *url = [NSURL fileURLWithPath:path1];
     
-    return [FileUtils readFileString:url encoding:NSUTF8StringEncoding];
+    return [SLFileUtils readFileString:url encoding:NSUTF8StringEncoding];
 }
 
 + (NSString*)readFileUtf8String:(NSString*)path {
     NSURL *url = [NSURL fileURLWithPath:path];
-    return [FileUtils readFileString:url encoding:NSUTF8StringEncoding];
+    return [SLFileUtils readFileString:url encoding:NSUTF8StringEncoding];
 }
 
 + (NSString*)readFileString:(NSURL*)url encoding:(NSStringEncoding)encoding {
@@ -98,17 +98,17 @@
 
 + (NSString*)getDocumentDirectory
 {
-    return [FileUtils getPathForDirectory:NSDocumentDirectory];
+    return [SLFileUtils getPathForDirectory:NSDocumentDirectory];
 }
 
 + (NSString*)getCachesDirectory
 {
-    return [FileUtils getPathForDirectory:NSCachesDirectory];
+    return [SLFileUtils getPathForDirectory:NSCachesDirectory];
 }
 
 + (BOOL)exists:(NSString*)path
 {
-    return [FileUtils exists:[NSFileManager defaultManager] path:path];
+    return [SLFileUtils exists:[NSFileManager defaultManager] path:path];
 }
 + (BOOL)exists:(NSFileManager*)fileManager path:(NSString*)path
 {
@@ -120,7 +120,7 @@
 
 + (BOOL)copyFile:(NSString*)src dst:(NSString*)dst
 {
-    return [FileUtils copyFile:[NSFileManager defaultManager] src:src dst:dst];
+    return [SLFileUtils copyFile:[NSFileManager defaultManager] src:src dst:dst];
 }
 + (BOOL)copyFile:(NSFileManager*)fileManager src:(NSString*)src dst:(NSString*)dst
 {
@@ -128,12 +128,12 @@
         return FALSE;
     }
     
-    if (![FileUtils makeFileFolder:fileManager path:dst]) {
+    if (![SLFileUtils makeFileFolder:fileManager path:dst]) {
         return FALSE;
     }
     
     //cover copy
-    [FileUtils deleteFile:fileManager path:dst];
+    [SLFileUtils deleteFile:fileManager path:dst];
     
     NSError *errorInfo;
     BOOL r = [fileManager copyItemAtPath:src toPath:dst error:&errorInfo];
@@ -148,7 +148,7 @@
 
 + (BOOL)moveFile:(NSString*)src dst:(NSString*)dst
 {
-    return [FileUtils moveFile:[NSFileManager defaultManager] src:src dst:dst];
+    return [SLFileUtils moveFile:[NSFileManager defaultManager] src:src dst:dst];
 }
 + (BOOL)moveFile:(NSFileManager*)fileManager src:(NSString*)src dst:(NSString*)dst
 {
@@ -156,12 +156,12 @@
         return FALSE;
     }
     
-    if (![FileUtils makeFileFolder:fileManager path:dst]) {
+    if (![SLFileUtils makeFileFolder:fileManager path:dst]) {
         return FALSE;
     }
     
     //cover copy
-    [FileUtils deleteFile:fileManager path:dst];
+    [SLFileUtils deleteFile:fileManager path:dst];
     
     NSError *errorInfo;
     BOOL r = [fileManager copyItemAtPath:src toPath:dst error:&errorInfo];
@@ -182,7 +182,7 @@
 
 + (BOOL)moveFolder:(NSString*)src dst:(NSString*)dst
 {
-    return [FileUtils moveFolder:[NSFileManager defaultManager] src:src dst:dst];
+    return [SLFileUtils moveFolder:[NSFileManager defaultManager] src:src dst:dst];
 }
 
 + (BOOL)moveFolder:(NSFileManager*)fileManager src:(NSString*)src dst:(NSString*)dst
@@ -194,14 +194,14 @@
     BOOL isDir;
     [fileManager fileExistsAtPath:src isDirectory:&isDir];
     if (!isDir) {
-        return [FileUtils moveFile:fileManager src:src dst:dst];
+        return [SLFileUtils moveFile:fileManager src:src dst:dst];
     }
     
     NSDirectoryEnumerator *fileEnumerator = [fileManager enumeratorAtPath:src];
     for (NSString *fileName in fileEnumerator) {
         NSString *srcFilePath = [src stringByAppendingPathComponent:fileName];
         NSString *dstFilePath = [dst stringByAppendingPathComponent:fileName];
-        BOOL r = [FileUtils moveFolder:fileManager src:srcFilePath dst:dstFilePath];
+        BOOL r = [SLFileUtils moveFolder:fileManager src:srcFilePath dst:dstFilePath];
         if (!r) return FALSE;
     }
     
@@ -211,7 +211,7 @@
 
 + (BOOL)deleteFile:(NSString*)path
 {
-    return [FileUtils deleteFile:[NSFileManager defaultManager] path:path];
+    return [SLFileUtils deleteFile:[NSFileManager defaultManager] path:path];
 }
 + (BOOL)deleteFile:(NSFileManager*)fileManager path:(NSString*)path
 {
@@ -234,16 +234,16 @@
 }
 
 + (BOOL)makeFileFolder:(NSString*)path {
-    return [FileUtils makeFileFolder:[NSFileManager defaultManager] path:path];
+    return [SLFileUtils makeFileFolder:[NSFileManager defaultManager] path:path];
 }
 
 + (BOOL)makeFileFolder:(NSFileManager*)fileManager path:(NSString*)path {
     NSString* dstFolder = [path stringByDeletingLastPathComponent];
-    return [FileUtils mkdirs:fileManager folderPath:dstFolder];
+    return [SLFileUtils mkdirs:fileManager folderPath:dstFolder];
 }
 
 + (BOOL)mkdirs:(NSString*)folderPath {
-    return [FileUtils mkdirs:[NSFileManager defaultManager] folderPath:folderPath];
+    return [SLFileUtils mkdirs:[NSFileManager defaultManager] folderPath:folderPath];
 }
 
 + (BOOL)mkdirs:(NSFileManager*)fileManager folderPath:(NSString*)folderPath {
@@ -260,7 +260,7 @@
 }
 
 + (NSArray<NSString*>*)listFiles:(NSString*)folderPath {
-    return [FileUtils listFiles:[NSFileManager defaultManager] folderPath:folderPath];
+    return [SLFileUtils listFiles:[NSFileManager defaultManager] folderPath:folderPath];
 }
 
 + (NSArray<NSString*>*)listFiles:(NSFileManager*)fileManager folderPath:(NSString*)folderPath {
