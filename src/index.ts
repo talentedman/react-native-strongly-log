@@ -81,8 +81,8 @@ export default class StronglyLog {
     return SLog.clearOldLogs();
   }
   /**
-   * 压缩日志文件
-   * @returns 返回一个Promise，解析为压缩后的文件路径字符串
+   * 压缩日志文件 返回为压缩后的文件路径字符串
+   * @returns 返回一个Promise
    */
   static zipLogFiles(): Promise<string> {
     return SLog.zipLogFiles();

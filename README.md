@@ -6,17 +6,31 @@ React Native Log for Android and iOS
 
 ```sh
 npm install react-native-strongly-log
+yarn add react-native-strongly-log
+pnpm i react-native-strongly-log
 ```
 
 ## Usage
 
 
 ```js
-import { multiply } from 'react-native-strongly-log';
+import StronglyLog from 'react-native-strongly-log';
 
 // ...
+记录日志
+StronglyLog.info('Hello, World!');
+StronglyLog.debug('Hello, World!');
+StronglyLog.warn('Hello, World!');
+StronglyLog.error('Hello, World!');
 
-const result = await multiply(3, 7);
+清除所有日志记录
+await StronglyLog.clearAllLogs()
+
+清除4天前的日志
+await StronglyLog.clearOldLogs()
+
+压缩日志文件 返回为压缩后的文件路径字符串
+await StronglyLog.zipLogFiles()
 ```
 
 
