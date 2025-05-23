@@ -30,7 +30,10 @@ await StronglyLog.clearAllLogs()
 await StronglyLog.clearOldLogs()
 
 压缩日志文件 返回为压缩后的文件路径字符串
-await StronglyLog.zipLogFiles()
+await StronglyLog.zipLogFiles(fileName)
+
+flush日志
+await StronglyLog.flush()
 ```
 
 

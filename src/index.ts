@@ -84,8 +84,8 @@ export default class StronglyLog {
    * 压缩日志文件 返回为压缩后的文件路径字符串
    * @returns 返回一个Promise
    */
-  static zipLogFiles(): Promise<string> {
-    return SLog.zipLogFiles();
+  static zipLogFiles(fileName: string): Promise<string> {
+    return SLog.zipLogFiles(fileName);
   }
   /**
    * 强制刷新日志缓冲区

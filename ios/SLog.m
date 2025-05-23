@@ -110,7 +110,7 @@ static FILE* file = NULL;
 +(NSString*)getLogZipFolder {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* folder = [paths firstObject];
-    return [folder stringByAppendingPathComponent:@"rnsl_logs.zip"];
+    return [folder stringByAppendingPathComponent:@"rnsl_logs_zip"];
 }
 +(NSString*)getLogFile {
     return sm_logFile;

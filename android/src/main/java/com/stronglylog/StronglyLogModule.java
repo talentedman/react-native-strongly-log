@@ -71,7 +71,7 @@ public class StronglyLogModule  extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void zipLogFiles(final Promise promise) {
+    public void zipLogFiles(final String zipFileName, final Promise promise) {
         //在io线程上面跑
         Observable.create((ObservableOnSubscribe<String>) emitter -> {
             promise.resolve(doZipLogFiles());
@@ -80,12 +80,12 @@ public class StronglyLogModule  extends ReactContextBaseJavaModule {
         }).subscribeOn(Schedulers.io()).subscribe();
     }
 
-    private String doZipLogFiles() {
+    private String doZipLogFiles(String zipFileName) {
         final File logFileFolder = L.getLogFileFolder(getReactApplicationContext());
         if (!logFileFolder.exists()) {
             return null;
         }
-        final File zipFile = new File(L.getLogZipFolder(getReactApplicationContext()), "" + System.currentTimeMillis());
+        final File zipFile = new File(L.getLogZipFolder(getReactApplicationContext()), zipFileName);
 
         if (ZipUtil.zip(logFileFolder.getAbsolutePath(), zipFile.getAbsolutePath())) {
             return zipFile.getAbsolutePath();

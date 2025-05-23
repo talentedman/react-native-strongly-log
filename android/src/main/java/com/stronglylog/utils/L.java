@@ -211,7 +211,7 @@ public class L {
     }
 
     public static File getLogZipFolder(Context ctx) {
-        return new File(FileUtils.getExtStorageDir(ctx), "rnsl_logs.zip");
+        return new File(FileUtils.getExtStorageDir(ctx), "rnsl_logs_zip");
     }
 
     public static File getLogFile() {

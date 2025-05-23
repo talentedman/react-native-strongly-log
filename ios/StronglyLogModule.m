@@ -1,5 +1,3 @@
-
-
 #import "StronglyLogModule.h"
 #import <SLog.h>
 #import <SLFileUtils.h>
@@ -50,11 +48,11 @@ RCT_REMAP_METHOD(clearOldLogs, resolve:(RCTPromiseResolveBlock)resolve reject:(R
 
 #pragma mark - zipLogFiles
 
-RCT_REMAP_METHOD(zipLogFiles, resolve1:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+RCT_REMAP_METHOD(zipLogFiles, fileName:(NSString*)fileName resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     NSString* logFileFolder = [SLog getLogFileFolder];
     NSString* logZipFolder = [SLog getLogZipFolder];
-    NSString* zipFile = [logZipFolder stringByAppendingPathComponent:[NSString stringWithFormat:@"%llu", (UInt64)[[NSDate date] timeIntervalSince1970] * 1000]];
+    NSString* zipFile = [logZipFolder stringByAppendingPathComponent:fileName];
     
     NSString* ret = nil;
     
