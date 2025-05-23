@@ -74,7 +74,7 @@ public class StronglyLogModule  extends ReactContextBaseJavaModule {
     public void zipLogFiles(final String zipFileName, final Promise promise) {
         //在io线程上面跑
         Observable.create((ObservableOnSubscribe<String>) emitter -> {
-            promise.resolve(doZipLogFiles());
+            promise.resolve(doZipLogFiles(zipFileName));
 
             emitter.onComplete();
         }).subscribeOn(Schedulers.io()).subscribe();
